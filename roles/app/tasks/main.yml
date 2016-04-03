@@ -1,0 +1,46 @@
+---
+# tasks for servers in app role
+
+- name: create base dir for deployed applications
+  become: yes
+  file: path=/app/www state=directory owner=pi group=pi
+
+- name: install rbenv
+  git: repo=https://github.com/rbenv/rbenv.git dest=~/.rbenv
+  notify:
+    - update bash profile
+
+- name: install ruby-build plugin
+  git: repo=https://github.com/rbenv/ruby-build.git dest=~/.rbenv/plugins/ruby-build
+
+- name: instal dependencies
+  become: yes
+  apt: name={{ item }}
+  with_items:
+    - autoconf
+    - bison
+    - build-essential
+    - libssl-dev
+    - libyaml-dev
+    - libreadline6-dev
+    - zlib1g-dev
+    - libncurses5-dev
+    - libffi-dev
+    - libgdbm3
+    - libgdbm-dev
+
+- name: install ruby
+  shell: ~/.rbenv/bin/rbenv install -s 2.3.0
+  register: action
+  changed_when: "action.rc != 0"
+
+- name: set default ruby version
+  shell: ~/.rbenv/bin/rbenv global 2.3.0
+  register: action
+  changed_when: "action.rc != 0"
+
+- name: show ruby versions
+  command: ~/.rbenv/bin/rbenv versions
+  register: versions
+  notify:
+    - show information

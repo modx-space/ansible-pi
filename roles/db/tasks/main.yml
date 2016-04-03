@@ -1,0 +1,8 @@
+---
+# tasks for servers in db role
+
+- name: install postgresql
+  become: yes
+  apt: name=postgresql state=latest
+  notify:
+    - restart postgresql

@@ -1,0 +1,28 @@
+---
+# tasks for servers in common role
+
+- name: update source list
+  become: yes
+  replace: dest=/etc/apt/sources.list regexp={{ item.original }} replace='{{ item.replaced }}' backup=yes
+  with_items:
+    - {
+        original: 'http://mirrordirector.raspbian.org/raspbian/',
+        replaced: 'http://mirrors.zju.edu.cn/raspbian/raspbian/'
+      }
+
+- name: update os
+  become: yes
+  apt: update_cache=yes upgrade=yes
+
+- name: create user and grant sudo
+  become: yes
+  user: name=pi groups=sudo append=yes
+
+- name: install basic tools
+  become: yes
+  apt: name={{ item }} state=latest
+  with_items:
+    - vim
+    - curl
+    - wget
+    - git

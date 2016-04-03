@@ -1,0 +1,18 @@
+---
+# main entry
+
+# - hosts: all
+#   roles:
+#     - common
+#
+# - hosts: app
+#   roles:
+#     - app
+#
+# - hosts: web
+#   roles:
+#     - web
+
+- hosts: db
+  roles:
+    - db
