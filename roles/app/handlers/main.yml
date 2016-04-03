@@ -8,6 +8,6 @@
     - 'eval "$(rbenv init -)"'
 
 - name: show information
-  debug: msg="Ruby versions: {{ item }}"
+  debug: msg="Ruby versions => {{ item }}"
   with_items:
     - "{{ versions.stdout_lines }}"
