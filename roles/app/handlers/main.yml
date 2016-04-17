@@ -1,12 +1,6 @@
 ---
 # handlers for servers in app role
 
-- name: update bash profile
-  lineinfile: dest=~/.bash_profile line='{{ item }}' create=yes
-  with_items:
-    - 'export PATH="$HOME/.rbenv/bin:$PATH"'
-    - 'eval "$(rbenv init -)"'
-
 - name: show information
   debug: msg="Ruby versions => {{ item }}"
   with_items:
