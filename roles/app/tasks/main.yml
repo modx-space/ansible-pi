@@ -34,17 +34,19 @@
     - libgdbm-dev
 
 - name: install ruby
-  shell: ~/.rbenv/bin/rbenv install -s 2.3.0
+  shell: bash -lc 'rbenv install -s 2.3.0'
   register: action
   changed_when: "action.rc != 0"
 
 - name: set default ruby version
-  shell: ~/.rbenv/bin/rbenv global 2.3.0
+  shell: bash -lc 'rbenv global 2.3.0'
   register: action
   changed_when: "action.rc != 0"
 
 - name: show ruby versions
-  command: ~/.rbenv/bin/rbenv versions
-  register: versions
+  shell: bash -lc 'rbenv versions'
+  register: ruby-versions
+  notify:
+    - show ruby versions
   notify:
     - show information

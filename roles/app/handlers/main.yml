@@ -1,7 +1,7 @@
 ---
 # handlers for servers in app role
 
-- name: show information
-  debug: msg="Ruby versions => {{ item }}"
+- name: show ruby versions
+  debug: msg="Ruby Versions => {{ item }}"
   with_items:
-    - "{{ versions.stdout_lines }}"
+    - "{{ ruby-versions.stdout_lines }}"
