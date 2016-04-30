@@ -6,3 +6,11 @@
   apt: name=postgresql state=latest
   notify:
     - restart postgresql
+
+- name: instal libs
+  become: yes
+  apt: name={{ item }}
+  with_items:
+    - libpq5
+    - libpq-dev
+    - postgresql-server-dev-9.4
