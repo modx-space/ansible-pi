@@ -47,6 +47,9 @@
   lineinfile: dest=~/.gemrc line='{{ item }}' create=yes
   with_items:
     - 'gem: --no-document'
+
+- name: install bundler
+  shell: bash -lc 'gem install bundler'
 - name: show ruby versions
   shell: bash -lc 'rbenv versions'
   register: ruby-versions
