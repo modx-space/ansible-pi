@@ -50,6 +50,10 @@
 
 - name: install bundler
   shell: bash -lc 'gem install bundler'
+
+- name: config gem source
+  shell: bash -lc 'bundle config mirror.https://rubygems.org https://gems.ruby-china.org'
+
 - name: show ruby versions
   shell: bash -lc 'rbenv versions'
   register: ruby-versions
