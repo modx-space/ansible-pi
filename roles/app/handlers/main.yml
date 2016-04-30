@@ -5,3 +5,8 @@
   debug: msg="Ruby Versions => {{ item }}"
   with_items:
     - "{{ ruby-versions.stdout_lines }}"
+
+- name: show gem version
+  debug: msg="Gem Versions => {{ item }}"
+  with_items:
+    - "{{ gem-version.stdout_lines }}"
