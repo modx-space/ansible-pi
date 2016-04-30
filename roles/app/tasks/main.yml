@@ -43,6 +43,10 @@
   register: action
   changed_when: "action.rc != 0"
 
+- name: config gemrc
+  lineinfile: dest=~/.gemrc line='{{ item }}' create=yes
+  with_items:
+    - 'gem: --no-document'
 - name: show ruby versions
   shell: bash -lc 'rbenv versions'
   register: ruby-versions
